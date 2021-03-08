@@ -10,4 +10,5 @@
 
     <color name="login_green">#29E100</color>
     <color name="signup_blue">#00C2E4</color>
+    <color name="button_gray">#E6E6E6</color>
 </resources>
