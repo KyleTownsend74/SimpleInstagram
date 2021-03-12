@@ -133,8 +133,7 @@ public class MainActivity extends AppCompatActivity {
         Post post = new Post();
 
         post.setDescription(description);
-        // UNCOMMENT THIS TO SAVE IMAGES TO SERVER, COMMENTED OUT TO SAVE SERVER SPACE
-        // post.setImage(new ParseFile(photoFile));
+        post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
             @Override
