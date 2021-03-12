@@ -21,7 +21,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] User sees Instagram app icon in app drawer and login screen that looks like the real Instagram page.
+- [x] User sees Instagram app icon in app drawer and a styled login screen.
 
 ## Video Walkthrough
 
