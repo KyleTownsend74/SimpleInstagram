@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:layout_margin="0dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        app:srcCompat="@drawable/nav_logo_whiteout" />
 
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="567dp"
         android:layout_above="@id/bottomNavigation"
-        />
+        android:layout_below="@+id/ivLogo"
+        android:layout_marginTop="0dp">
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -24,5 +35,25 @@
         app:itemIconTint="@color/black"
         app:itemTextColor="#000000"
         app:menu="@menu/menu_bottom_navigation" />
+
+    <ImageView
+        android:id="@+id/ivCamera"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        app:srcCompat="@drawable/ic_camera_filled"
+        app:tint="@color/black"/>
+
+    <ImageView
+        android:id="@+id/ivDirectTop"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="17dp"
+        app:srcCompat="@drawable/ic_direct_filled"
+        app:tint="@color/black" />
 
 </RelativeLayout>
