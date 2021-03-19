@@ -41,7 +41,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I had some initial trouble with importing the icons and putting them in the proper places in each layout, but was able to get this accomplished eventually.
 
 ## Open-source libraries used
 
