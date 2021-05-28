@@ -68,15 +68,14 @@
         android:layout_marginTop="8dp"
         android:background="#D1D1D1" />
 
-    <ImageView
+    <CheckBox
         android:id="@+id/ivLike"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_below="@+id/ivImage"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/ic_heart_outline"
-        app:tint="@color/black"/>
+        android:button="@drawable/ic_heart" />
 
     <ImageView
         android:id="@+id/ivComment"
