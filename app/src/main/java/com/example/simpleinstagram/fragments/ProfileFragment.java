@@ -20,6 +20,10 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,12 +72,40 @@ public class ProfileFragment extends PostsFragment{
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
+
+                // Prepare to add liked posts to adapter
+                adapter.clearLikedPostIds();
+                ParseUser user = ParseUser.getCurrentUser();
+                JSONArray likedPosts = user.getJSONArray("likedPosts");
+
+                // Add liked posts
+                if(likedPosts != null) {
+                    for(int i = 0; i < likedPosts.length(); i++) {
+                        try {
+                            adapter.addLikedPostId(likedPosts.get(i).toString());
+                        } catch (JSONException exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                }
+                else {
+                    user.put("likedPosts", new ArrayList<>());
+                    user.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e != null) {
+                                Log.e(TAG, "Error initializing user likes", e);
+                            }
+                        }
+                    });
+                }
+
                 for(Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
-                allPosts.addAll(posts);
-                adapter.notifyDataSetChanged();
+                adapter.clear();
+                adapter.addAll(posts);
             }
         });
     }

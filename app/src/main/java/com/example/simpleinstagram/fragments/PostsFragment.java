@@ -97,15 +97,12 @@ public class PostsFragment extends Fragment {
                     return;
                 }
 
-                // Add liked posts to adapter
+                // Prepare to add liked posts to adapter
                 adapter.clearLikedPostIds();
                 ParseUser user = ParseUser.getCurrentUser();
-                /*user.put("likedPosts", new ArrayList<>());
-                user.add("likedPosts", "q8Dcd6JGcC");
-                user.add("likedPosts", "avourVVQpt");
-                user.saveInBackground();*/
                 JSONArray likedPosts = user.getJSONArray("likedPosts");
 
+                // Add liked posts
                 if(likedPosts != null) {
                     for(int i = 0; i < likedPosts.length(); i++) {
                         try {

@@ -19,7 +19,6 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,7 +93,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvDate = itemView.findViewById(R.id.tvDate);
-            cbLike = itemView.findViewById(R.id.ivLike);
+            cbLike = itemView.findViewById(R.id.cbLike);
         }
 
         public void bind(Post post) {
@@ -106,14 +105,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
             tvDate.setText(post.getDate());
 
-            /*changedByProgram = true;
-            cbLike.setChecked(true);
-            changedByProgram = false;
-            cbLike.setChecked(false);*/
-
+            // Set like icon to unchecked by default
             changedByProgram = true;
             cbLike.setChecked(false);
-            // for loop through liked posts. if any of the liked posts = current post, change to true (no else)
+            // If user has liked the post, set the like icon to checked.
             for(String id : likedPostIds) {
                 if(id.equals(post.getObjectId())) {
                     cbLike.setChecked(true);
@@ -133,7 +128,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         // If the checkbox is checked, then the post has been liked
                         if(isChecked) {
                             addLikedPostId(post.getObjectId());
-                            //saveLikedPostIds();
                             user.add("likedPosts", post.getObjectId());
                             user.saveInBackground(new SaveCallback() {
                                 @Override
@@ -146,7 +140,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         }
                         else {
                             removeLikedPostId(post.getObjectId());
-                            //saveLikedPostIds();
                             user.removeAll("likedPosts", Arrays.asList(post.getObjectId()));
                             user.saveInBackground(new SaveCallback() {
                                 @Override
@@ -160,20 +153,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     }
                     else {
                         Log.i(TAG, "Changed by program");
-                    }
-                }
-            });
-        }
-
-        private void saveLikedPostIds() {
-            ParseUser user = ParseUser.getCurrentUser();
-
-            user.put("likedPosts", likedPostIds);
-            user.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if(e != null) {
-                        Log.e(TAG, "Issue saving like to database", e);
                     }
                 }
             });
