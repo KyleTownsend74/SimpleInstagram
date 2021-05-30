@@ -10,11 +10,9 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.simpleinstagram.LoginActivity;
 import com.example.simpleinstagram.Post;
-import com.example.simpleinstagram.PostsAdapter;
 import com.example.simpleinstagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;

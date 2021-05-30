@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simpleinstagram.Post;
-import com.example.simpleinstagram.PostsAdapter;
+import com.example.simpleinstagram.Adapters.PostsAdapter;
 import com.example.simpleinstagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -26,7 +26,6 @@ import com.parse.SaveCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

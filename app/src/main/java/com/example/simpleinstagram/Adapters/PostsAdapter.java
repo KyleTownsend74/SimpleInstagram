@@ -1,6 +1,7 @@
-package com.example.simpleinstagram;
+package com.example.simpleinstagram.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.simpleinstagram.CommentActivity;
+import com.example.simpleinstagram.Post;
+import com.example.simpleinstagram.R;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -85,6 +89,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvDate;
         private CheckBox cbLike;
         private TextView tvLikeNum;
+        private ImageView ivComment;
 
         private boolean changedByProgram;
 
@@ -96,6 +101,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDate = itemView.findViewById(R.id.tvDate);
             cbLike = itemView.findViewById(R.id.cbLike);
             tvLikeNum = itemView.findViewById(R.id.tvLikeNum);
+            ivComment = itemView.findViewById(R.id.ivComment);
         }
 
         public void bind(Post post) {
@@ -179,6 +185,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     else {
                         Log.i(TAG, "Changed by program");
                     }
+                }
+            });
+
+            ivComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent commentIntent = new Intent(context, CommentActivity.class);
+                    commentIntent.putExtra("postId", post.getObjectId());
+                    context.startActivity(commentIntent);
                 }
             });
         }
