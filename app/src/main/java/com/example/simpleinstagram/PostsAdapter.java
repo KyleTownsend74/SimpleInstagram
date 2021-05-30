@@ -84,6 +84,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvDescription;
         private TextView tvDate;
         private CheckBox cbLike;
+        private TextView tvLikeNum;
 
         private boolean changedByProgram;
 
@@ -94,6 +95,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvDate = itemView.findViewById(R.id.tvDate);
             cbLike = itemView.findViewById(R.id.cbLike);
+            tvLikeNum = itemView.findViewById(R.id.tvLikeNum);
         }
 
         public void bind(Post post) {
@@ -104,6 +106,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
             }
             tvDate.setText(post.getDate());
+            tvLikeNum.setText("" + post.getLikes());
 
             // Set like icon to unchecked by default
             changedByProgram = true;
@@ -137,6 +140,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                                     }
                                 }
                             });
+
+                            post.incrementLikes();
+                            post.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if(e != null) {
+                                        Log.e(TAG, "Error incrementing likes", e);
+                                    }
+                                }
+                            });
+                            tvLikeNum.setText("" + (Integer.parseInt((String)tvLikeNum.getText()) + 1));
                         }
                         else {
                             removeLikedPostId(post.getObjectId());
@@ -149,6 +163,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                                     }
                                 }
                             });
+
+                            post.decrementLikes();
+                            post.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if(e != null) {
+                                        Log.e(TAG, "Error decrementing likes", e);
+                                    }
+                                }
+                            });
+                            tvLikeNum.setText("" + (Integer.parseInt((String)tvLikeNum.getText()) - 1));
                         }
                     }
                     else {

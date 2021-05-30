@@ -36,24 +36,4 @@
         app:itemTextColor="#000000"
         app:menu="@menu/menu_bottom_navigation" />
 
-    <ImageView
-        android:id="@+id/ivCamera"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="7dp"
-        app:srcCompat="@drawable/ic_camera_filled"
-        app:tint="@color/black"/>
-
-    <ImageView
-        android:id="@+id/ivDirectTop"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="17dp"
-        app:srcCompat="@drawable/ic_direct_filled"
-        app:tint="@color/black" />
-
 </RelativeLayout>
