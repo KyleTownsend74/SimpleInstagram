@@ -75,7 +75,8 @@
         android:layout_below="@+id/ivImage"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:button="@drawable/ic_heart" />
+        android:button="@drawable/ic_heart"
+        app:useMaterialThemeColors="true" />
 
     <TextView
         android:id="@+id/tvLikeNum"
@@ -95,8 +96,8 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/tvLikeNum"
-        app:srcCompat="@drawable/ic_comment"
-        app:tint="@color/black" />
+        android:tint="#706F6F"
+        app:srcCompat="@drawable/ic_comment" />
 
     <TextView
         android:id="@+id/tvCommentNum"

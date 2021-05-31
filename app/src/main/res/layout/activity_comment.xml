@@ -51,9 +51,10 @@
         android:layout_height="60dp"
         android:layout_below="@+id/etComment"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="Post" />
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/signup_blue"
+        android:text="Post Comment" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
