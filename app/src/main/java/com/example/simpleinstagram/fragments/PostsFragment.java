@@ -1,5 +1,7 @@
 package com.example.simpleinstagram.fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,8 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +79,7 @@ public class PostsFragment extends Fragment {
         rvPosts = view.findViewById(R.id.rvPosts);
 
         allPosts = new ArrayList<>();
-        adapter = new PostsAdapter(getContext(), allPosts);
+        adapter = new PostsAdapter(this, getContext(), allPosts);
 
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -132,5 +136,17 @@ public class PostsFragment extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 20 && resultCode == RESULT_OK) {
+            int position = data.getIntExtra("position", -1);
+            String id = data.getStringExtra("id");
+
+            if(position >= 0) {
+                adapter.refreshItem(position, id);
+            }
+        }
     }
 }

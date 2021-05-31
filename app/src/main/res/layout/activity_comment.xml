@@ -7,6 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".CommentActivity">
 
+    <TextView
+        android:id="@+id/tvPostUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="name" />
+
+    <ImageView
+        android:id="@+id/ivImageComment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvPostUsername"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <EditText
         android:id="@+id/etComment"
         android:layout_width="match_parent"
@@ -16,6 +41,7 @@
         android:ems="10"
         android:hint="Comment"
         android:inputType="textPersonName"
+        android:layout_below="@+id/ivImageComment"
         tools:layout_editor_absoluteX="24dp"
         tools:layout_editor_absoluteY="31dp" />
 

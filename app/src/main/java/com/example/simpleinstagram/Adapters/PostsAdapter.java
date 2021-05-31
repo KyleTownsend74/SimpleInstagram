@@ -1,5 +1,6 @@
 package com.example.simpleinstagram.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -12,14 +13,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.simpleinstagram.CommentActivity;
+import com.example.simpleinstagram.MainActivity;
 import com.example.simpleinstagram.Post;
 import com.example.simpleinstagram.R;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -31,11 +35,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     public static final String TAG = "PostsAdapter";
 
+    private Fragment curFragment;
     private Context context;
     private List<Post> posts;
     private List<String> likedPostIds;
 
-    public PostsAdapter(Context context, List<Post> posts) {
+    public PostsAdapter(Fragment curFragment, Context context, List<Post> posts) {
+        this.curFragment = curFragment;
         this.context = context;
         this.posts = posts;
         likedPostIds = new ArrayList<>();
@@ -81,6 +87,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         likedPostIds.clear();
     }
 
+    public void refreshItem(int position, String id) {
+        ParseQuery<Post> postQuery = ParseQuery.getQuery("Post");
+        postQuery.include("user");
+        postQuery.getInBackground(id, (post, e) -> {
+            if(e != null) {
+                Log.e(TAG, "Error fetching post being commented on", e);
+            }
+            else {
+                posts.remove(position);
+                posts.add(position, post);
+                notifyItemChanged(position);
+            }
+        });
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvUsername;
@@ -90,6 +111,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private CheckBox cbLike;
         private TextView tvLikeNum;
         private ImageView ivComment;
+        private TextView tvCommentNum;
 
         private boolean changedByProgram;
 
@@ -102,6 +124,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             cbLike = itemView.findViewById(R.id.cbLike);
             tvLikeNum = itemView.findViewById(R.id.tvLikeNum);
             ivComment = itemView.findViewById(R.id.ivComment);
+            tvCommentNum = itemView.findViewById(R.id.tvCommentNum);
         }
 
         public void bind(Post post) {
@@ -113,6 +136,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
             tvDate.setText(post.getDate());
             tvLikeNum.setText("" + post.getLikes());
+            tvCommentNum.setText("" + post.getComments());
 
             // Set like icon to unchecked by default
             changedByProgram = true;
@@ -192,8 +216,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     Intent commentIntent = new Intent(context, CommentActivity.class);
+                    commentIntent.putExtra("position", posts.indexOf(post));
                     commentIntent.putExtra("postId", post.getObjectId());
-                    context.startActivity(commentIntent);
+                    commentIntent.putExtra("postUsername", post.getUser().getUsername());
+                    curFragment.startActivityForResult(commentIntent, 20);
                 }
             });
         }

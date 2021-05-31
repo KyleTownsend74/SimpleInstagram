@@ -52,6 +52,11 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public void addToBeginning(Comment newComment) {
+        comments.add(0, newComment);
+        notifyItemInserted(0);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvUsernameComment;

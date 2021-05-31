@@ -98,4 +98,14 @@
         app:srcCompat="@drawable/ic_comment"
         app:tint="@color/black" />
 
+    <TextView
+        android:id="@+id/tvCommentNum"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_below="@+id/ivImage"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/ivComment"
+        tools:text="999" />
+
 </RelativeLayout>
