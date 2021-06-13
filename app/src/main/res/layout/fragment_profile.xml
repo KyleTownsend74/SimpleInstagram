@@ -14,6 +14,21 @@
         android:layout_weight="1"
         android:padding="8dp" />
 
+    <View
+        android:id="@+id/vDividerProfile1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="0dp"
+        android:background="#D1D1D1" />
+
+    <TextView
+        android:id="@+id/tvProfileUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Currently signed in as:"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"

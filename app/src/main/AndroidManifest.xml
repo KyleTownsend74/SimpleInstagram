@@ -7,12 +7,13 @@
 
     <application
         android:name=".ParseApplication"
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_new"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SimpleInstagram">
+        android:theme="@style/Theme.SimpleInstagram"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".CommentActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -31,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -119,8 +119,6 @@ public class ComposeFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 ivPostImage.setImageBitmap(takenImage);
-            } else {
-                Toast.makeText(getContext(), "Picture was taken", Toast.LENGTH_SHORT).show();
             }
         }
     }

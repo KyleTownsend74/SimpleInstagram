@@ -2,19 +2,19 @@ package com.example.simpleinstagram.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.simpleinstagram.LoginActivity;
 import com.example.simpleinstagram.Post;
-import com.example.simpleinstagram.PostsAdapter;
 import com.example.simpleinstagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -30,6 +30,7 @@ import java.util.List;
 
 public class ProfileFragment extends PostsFragment{
 
+    private TextView tvProfileUsername;
     private Button btnLogout;
 
     @Override
@@ -43,7 +44,11 @@ public class ProfileFragment extends PostsFragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tvProfileUsername = view.findViewById(R.id.tvProfileUsername);
         btnLogout = view.findViewById(R.id.btnLogout);
+        
+        tvProfileUsername.setText(Html.fromHtml("Currently signed in as: " + "<font color=black><b>" +
+                ParseUser.getCurrentUser().getUsername() + "</b></font>"));
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

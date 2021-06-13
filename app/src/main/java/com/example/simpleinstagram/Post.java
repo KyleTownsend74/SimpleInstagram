@@ -15,6 +15,7 @@ public class Post extends ParseObject {
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_AT = "createdAt";
     public static final String KEY_LIKES = "likes";
+    public static final String KEY_COMMENTS = "comments";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -52,5 +53,13 @@ public class Post extends ParseObject {
 
     public void decrementLikes() {
         put(KEY_LIKES, getLikes() - 1);
+    }
+
+    public int getComments() {
+        return getInt(KEY_COMMENTS);
+    }
+
+    public void incrementComments() {
+        put(KEY_COMMENTS, getComments() + 1);
     }
 }
